@@ -37,14 +37,14 @@ public class Perpustakaan {
 
                 switch (pilihan) {
                     case 1 -> {
-                        System.out.println("\n=== Daftar Buku ===");
+                    System.out.println("\n=== Daftar Buku ===");
                         for (int i = 0; i < daftarBuku.size(); i++) {
                             System.out.println((i + 1) + ". " + daftarBuku.get(i));
                         }
                     }
 
                     case 2 -> {
-                        System.out.println("\n=== Pinjam Buku ===");
+                    System.out.println("\n=== Pinjam Buku ===");
                         for (int i = 0; i < daftarBuku.size(); i++) {
                             System.out.println((i + 1) + ". " + daftarBuku.get(i));
                         }
@@ -113,4 +113,5 @@ public class Perpustakaan {
 
         input.close();
     }
+
 }
