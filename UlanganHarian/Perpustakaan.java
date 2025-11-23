@@ -5,10 +5,8 @@ public class Perpustakaan {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        String namaPeminjam = "";
-        String dummy = "";
-        double total = 0; 
-        int pilihan, jumlah = 0;
+        String namaPeminjam = "";   
+        int pilihan= 0;
         String lanjut = "y";
 
         // Daftar buku
@@ -19,7 +17,9 @@ public class Perpustakaan {
         daftarBuku.add("Dilan 1990");
         daftarBuku.add("Mariposa");
 
+        // Buku yang dipinjam
         ArrayList<String> bukuDipinjam = new ArrayList<>();
+
         try {
             System.out.println("=== Selamat Datang di Perpustakaan ===");
             System.out.print("Masukkan nama peminjam: ");
@@ -30,8 +30,9 @@ public class Perpustakaan {
                 System.out.println("1. Lihat Daftar Buku");
                 System.out.println("2. Pinjam Buku");
                 System.out.println("3. Kembalikan Buku");
-                System.out.println("4. Keluar");
-                System.out.print("Pilih menu (1-4): ");
+                System.out.println("4. Lihat Buku yang Dipinjam");
+                System.out.println("5. Keluar");
+                System.out.print("Pilih menu (1-5): ");
                 pilihan = input.nextInt();
 
                 switch (pilihan) {
@@ -52,8 +53,9 @@ public class Perpustakaan {
                         int pilihBuku = input.nextInt();
 
                         if (pilihBuku >= 1 && pilihBuku <= daftarBuku.size()) {
-                            System.out.println("Buku \"" + daftarBuku.get(pilihBuku - 1)
-                                    + "\" berhasil dipinjam!");
+                            String buku = daftarBuku.get(pilihBuku - 1);
+                            bukuDipinjam.add(buku);
+                            System.out.println("Buku \"" + buku + "\" berhasil dipinjam!");
                         } else {
                             System.out.println("Nomor buku tidak valid!");
                         }
@@ -63,10 +65,11 @@ public class Perpustakaan {
                         System.out.println("\n=== Kembalikan Buku ===");
                         System.out.println("Buku berhasil dikembalikan!");
                     }
+
                     case 4 -> {
-                        System.out.println("\n=== Daftar Buku Diinjam ===");
+                        System.out.println("\n=== Buku yang Sedang Dipinjam ===");
                         if (bukuDipinjam.isEmpty()) {
-                            System.out.println("Tidak ada buku yang dipinjam.");
+                            System.out.println("Belum ada buku yang dipinjam.");
                         } else {
                             for (int i = 0; i < bukuDipinjam.size(); i++) {
                                 System.out.println((i + 1) + ". " + bukuDipinjam.get(i));
@@ -80,19 +83,29 @@ public class Perpustakaan {
                         lanjut = "n";
                     }
 
-                    default -> {
-                        System.out.println("Pilihan tidak ada -_-");
-                    }
+                    default -> System.out.println("Pilihan tidak ada -_-");
                 }
 
-                if (pilihan != 4) {
+                if (pilihan != 5) {
                     System.out.print("\nKembali ke menu? (y/n): ");
                     lanjut = input.next();
                 }
 
             } while (lanjut.equalsIgnoreCase("y"));
 
-            System.out.println("\n=== Program Selesai ===");
+            System.out.println("\n===================================");
+            System.out.println("Ringkasan Peminjaman Buku:");
+            System.out.println("Nama Peminjam: " + namaPeminjam);
+            System.out.println("Buku yang Dipinjam:");
+            if (bukuDipinjam.isEmpty()) {
+                System.out.println("Tidak ada buku yang dipinjam.");
+            } else {
+                for (String buku : bukuDipinjam) {
+                    System.out.println("- " + buku);
+                }
+            }
+            System.out.println("Terima kasih, " + namaPeminjam +
+                    ", telah menggunakan aplikasi perpustakaan!");
 
         } catch (Exception e) {
             System.out.println("Terjadi kesalahan: " + e.getMessage());
@@ -101,4 +114,3 @@ public class Perpustakaan {
         input.close();
     }
 }
-// End of Perpustakaan.java
